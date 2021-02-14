@@ -38,8 +38,8 @@ class CreateNoteFragment : Fragment() {
         var mood = ""
         // TODO PHASE 1.2: Add on click listener to the submission FAB that calls insertNoteIntoDB()
         fab_yes.setOnClickListener {
-            var title = editTextTextPersonName.text.toString()
-            var text = editTextTextPersonName2.text.toString()
+            val title = editTextTextPersonName.text.toString()
+            val text = editTextTextPersonName2.text.toString()
             if(title == ""||text == "" || mood==""){
                 Toast.makeText(activity,"something is missing", Toast.LENGTH_SHORT).show()
             }

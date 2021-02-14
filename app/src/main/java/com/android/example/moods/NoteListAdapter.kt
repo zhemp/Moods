@@ -1,6 +1,7 @@
 package com.android.example.moods
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +47,8 @@ class NoteListAdapter(private var mNoteList: List<Note>): RecyclerView.Adapter<N
         setMoodImage(holder.image1,  mNoteList[position].reaction!!)
 
         holder.entryView.setOnClickListener {
-            val ac = R.id.action_noteFeedFragment_to_viewNoteFragment
+            //val ac = R.id.action_noteFeedFragment_to_viewNoteFragment
+            val ac = NoteFeedFragmentDirections.actionNoteFeedFragmentToViewNoteFragment(mNoteList[position])
             it.findNavController().navigate(ac)
         }
 
