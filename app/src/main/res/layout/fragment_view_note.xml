@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewNoteFragment">
+
+    <!-- TODO PHASE 1.3: ImageView that holds the Mood Image -->
+
+    <!-- TODO PHASE 1.3: Display Text for Mood Note Title and note content -->
+
+    <!-- TODO PHASE 1.3: FABs For Deleting and Editing Mood Note -->
+
+</FrameLayout>

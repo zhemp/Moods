@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpdateNoteFragment">
+
+    <!-- TODO PHASE 1.4: HorizontalScrollView of Mood Images -->
+
+    <!-- TODO PHASE 1.4: FABs For Submitting and Cancelling Mood Note Creation -->
+
+    <!-- TODO PHASE 1.4: Use EditText for Mood Note Title and note content -->
+
+</FrameLayout>
