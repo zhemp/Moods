@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.example.moods.data.Note
 import kotlinx.android.synthetic.main.noteslist_item.view.*
 
-class NoteListAdapter(private var mNoteList: List<Note>): RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() {
-
+class NoteListAdapter(): RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() {
+    private var mNoteList = emptyList<Note>()
 
     class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
         // TODO PHASE 1.1: Define Views in ViewHolder
@@ -58,8 +58,8 @@ class NoteListAdapter(private var mNoteList: List<Note>): RecyclerView.Adapter<N
     }
 
     override fun getItemCount(): Int = mNoteList.size
-
     // Update the recycler view list with new data passed in
+
     fun setData(newNotes: List<Note>) {
         this.mNoteList = newNotes
         notifyDataSetChanged()

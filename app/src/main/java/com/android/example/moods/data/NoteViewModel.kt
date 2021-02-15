@@ -8,9 +8,33 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class NoteViewModel(application: Application): AndroidViewModel(application) {
-    // TODO PHASE 2.0: declare member variables getAllNotes and repository
+    // aTODO PHASE 2.0: declare member variables getAllNotes and repository
+    val readAllNoteData: LiveData<List<Note>>
+    private val repository: NoteRepository
+    // aTODO PHASE 2.0: initialize noteDao, repository and getAllNotes
 
-    // TODO PHASE 2.0: initialize noteDao, repository and getAllNotes
+    init{
+        val NoteDao = NoteDatabase.getDatabase(application).NoteDao()
+        repository = NoteRepository(NoteDao)
+        readAllNoteData = repository.readAllNoteData
+    }
+
+    fun addNote(Note: Note) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addNote(Note)
+        }
+    }
+    fun updateNote(Note: Note) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateNote(Note)
+        }
+    }
+    fun deleteNote(Note: Note) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteNote(Note)
+        }
+    }
+
 
     // TODO PHASE 2.0: Define addNote method - call repository inside of a viewModelScope to add note
 

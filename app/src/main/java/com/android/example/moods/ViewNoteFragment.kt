@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.android.example.moods.data.Note
 import com.android.example.moods.data.NoteViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_view_note.*
@@ -20,12 +21,15 @@ class ViewNoteFragment : Fragment() {
 
     val args: ViewNoteFragmentArgs by navArgs()
 
+    private lateinit var myNoteViewModel : NoteViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_view_note, container, false)
+        myNoteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,13 +64,13 @@ class ViewNoteFragment : Fragment() {
 
         // TODO PHASE 1.3: Add an on click listener to the 'trashcan' FAB and call deleteNoteFromDB
         fab_trash.setOnClickListener {
-            deleteNoteFromDB()
+            deleteNoteFromDB(notein)
         }
     }
 
-    private fun deleteNoteFromDB() {
+    private fun deleteNoteFromDB(notein: Note) {
         // TODO PHASE 2.3: Delete Note Object being viewed using NoteViewModel
-
+        myNoteViewModel.deleteNote(notein)
 
         // TODO PHASE 1.3: Use the Navigation Controller to switch to NoteFeedFragment
             val ac = R.id.action_viewNoteFragment_to_noteFeedFragment

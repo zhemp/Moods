@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.fragment_view_note.*
 class UpdateNoteFragment : Fragment() {
 
     val args: UpdateNoteFragmentArgs by navArgs()
+    private lateinit var myNoteViewModel : NoteViewModel
 
     fun resetOutline(){
         imageView1.setImageResource(R.drawable.ic_anxious_outline_false)
@@ -44,6 +45,8 @@ class UpdateNoteFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_update_note, container, false)
+
+        myNoteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,7 +55,7 @@ class UpdateNoteFragment : Fragment() {
 
         // TODO PHASE 1.4: Set Data on screen by grabbing Note from safe args
         //  (EditTexts, ImageViews, and so on ...)
-        val note_edit = args.noteEdit
+        var note_edit = args.noteEdit
         editTextTextPersonName.setText(note_edit.title)
         editTextTextPersonName2.setText(note_edit.content)
         when (note_edit.reaction) {
@@ -78,7 +81,8 @@ class UpdateNoteFragment : Fragment() {
                 Toast.makeText(activity,"something is missing", Toast.LENGTH_SHORT).show()
             }
             else {
-                updateNoteIntoDB()
+                val nnote = Note(note_edit.id,title,text,mood)
+                updateNoteIntoDB(nnote)
             }
         }
 
@@ -125,9 +129,10 @@ class UpdateNoteFragment : Fragment() {
         }
     }
 
-    private fun updateNoteIntoDB() {
+    private fun updateNoteIntoDB(note:Note) {
         // TODO PHASE 2.4: Create(or update) a Note Object from data inputted on the screen
         //  and add said Note to Database using NoteViewModel
+        myNoteViewModel.updateNote(note)
 
 
         // TODO PHASE 1.4: Use the Navigation Controller to switch to NoteFeedFragment

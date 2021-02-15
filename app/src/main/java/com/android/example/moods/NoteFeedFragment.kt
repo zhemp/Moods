@@ -18,6 +18,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class NoteFeedFragment : Fragment() {
 
+    private lateinit var myNoteViewModel: NoteViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,10 +41,24 @@ class NoteFeedFragment : Fragment() {
         // TODO PHASE 1.1: Add RecyclerView
         //  you may fill the recyclerview with dummy data to test it out
         //  but you'll want to remove the dummy data when working on Phase 2
+        //Recycler View
+        val adapter = NoteListAdapter()
+        val recyclerView = topic_recyclerview
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        // ShopperViewmodel
+        myNoteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        myNoteViewModel.readAllNoteData.observe(viewLifecycleOwner, Observer{ notes ->
+           adapter.setData(notes)
+        })
+
+        /*
         val feeds = topic_recyclerview.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = NoteListAdapter(happylist)
         }
+         */
 
         // TODO PHASE 1.1: Add an on click listener to the '+' FAB
         //  and use the Navigation Controller to navigation to the CreateNoteFragment
