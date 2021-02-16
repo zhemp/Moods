@@ -56,6 +56,7 @@ class CreateNoteFragment : Fragment() {
         // TODO PHASE 1.2: Add on click listener to the cancellation FAB
         fab_no.setOnClickListener {
             val ac = R.id.action_createNoteFragment_to_noteFeedFragment
+            Toast.makeText(activity,"Changes Discarded", Toast.LENGTH_SHORT).show()
             findNavController().navigate(ac)
         }
 
