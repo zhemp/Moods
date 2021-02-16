@@ -14,7 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.example.moods.data.Note
 import kotlinx.android.synthetic.main.noteslist_item.view.*
 
-class NoteListAdapter(): RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() {
+class NoteListAdapter: RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() {
+
     private var mNoteList = emptyList<Note>()
 
     class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
@@ -41,8 +42,16 @@ class NoteListAdapter(): RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         // TODO PHASE 1.1: Update views in layout with Note data from the current
         //  Note ine the list based on the given position
-        holder.t1View.text = mNoteList[position].title
-        holder.t2View.text = mNoteList[position].content
+        if(mNoteList[position].title!!.length > 15){
+            holder.t1View.text = mNoteList[position].title!!.substring(0,14) + "..."
+        }else {
+            holder.t1View.text = mNoteList[position].title!!
+        }
+        if(mNoteList[position].content!!.length > 15){
+            holder.t2View.text = mNoteList[position].content!!.substring(0,14) + "..."
+        }else {
+            holder.t2View.text = mNoteList[position].content!!
+        }
         //  not very sure about the code below.
         setMoodImage(holder.image1,  mNoteList[position].reaction!!)
 
@@ -58,6 +67,7 @@ class NoteListAdapter(): RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() 
     }
 
     override fun getItemCount(): Int = mNoteList.size
+
     // Update the recycler view list with new data passed in
 
     fun setData(newNotes: List<Note>) {

@@ -1,10 +1,12 @@
 package com.android.example.moods
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -26,9 +28,8 @@ import kotlinx.android.synthetic.main.fragment_update_note.imageView7
 import kotlinx.android.synthetic.main.fragment_view_note.*
 
 class UpdateNoteFragment : Fragment() {
-
+    private lateinit var myNoteViewModel: NoteViewModel
     val args: UpdateNoteFragmentArgs by navArgs()
-    private lateinit var myNoteViewModel : NoteViewModel
 
     fun resetOutline(){
         imageView1.setImageResource(R.drawable.ic_anxious_outline_false)
@@ -45,17 +46,17 @@ class UpdateNoteFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_update_note, container, false)
-
-        myNoteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var mood = ""
+        myNoteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        val note_edit = args.noteEdit
+        var mood = note_edit.reaction.toString()
 
         // TODO PHASE 1.4: Set Data on screen by grabbing Note from safe args
         //  (EditTexts, ImageViews, and so on ...)
-        var note_edit = args.noteEdit
+
         editTextTextPersonName.setText(note_edit.title)
         editTextTextPersonName2.setText(note_edit.content)
         when (note_edit.reaction) {
@@ -81,8 +82,7 @@ class UpdateNoteFragment : Fragment() {
                 Toast.makeText(activity,"something is missing", Toast.LENGTH_SHORT).show()
             }
             else {
-                val nnote = Note(note_edit.id,title,text,mood)
-                updateNoteIntoDB(nnote)
+                updateNoteIntoDB(note_edit.id,title,text,mood)
             }
         }
 
@@ -91,6 +91,7 @@ class UpdateNoteFragment : Fragment() {
         //  sends the user back to NoteFeedFragment
         fab_no_1.setOnClickListener {
             val ac = R.id.action_updateNoteFragment_to_noteFeedFragment
+            Toast.makeText(activity,"Changes Discarded", Toast.LENGTH_SHORT).show()
             findNavController().navigate(ac)
         }
 
@@ -129,11 +130,13 @@ class UpdateNoteFragment : Fragment() {
         }
     }
 
-    private fun updateNoteIntoDB(note:Note) {
+    private fun updateNoteIntoDB(id: Int, title: String, text:String, Mood:String) {
         // TODO PHASE 2.4: Create(or update) a Note Object from data inputted on the screen
         //  and add said Note to Database using NoteViewModel
-        myNoteViewModel.updateNote(note)
+        val note = Note(id, title, text, Mood)
 
+        myNoteViewModel.updatenote(note)
+        Toast.makeText(requireContext(),"Note updated", Toast.LENGTH_SHORT).show()
 
         // TODO PHASE 1.4: Use the Navigation Controller to switch to NoteFeedFragment
             val ac = R.id.action_updateNoteFragment_to_noteFeedFragment

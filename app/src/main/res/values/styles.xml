@@ -6,6 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:fragmentEnterTransition">@transition/activity_fade</item>
+        <item name="android:fragmentExitTransition">@transition/activity_slide</item>
+        <item name="android:fragmentReturnTransition">@transition/activity_slide</item>
     </style>
 
 </resources>

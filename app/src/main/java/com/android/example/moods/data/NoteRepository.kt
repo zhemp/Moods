@@ -4,22 +4,21 @@ import androidx.lifecycle.LiveData
 
 class NoteRepository(private val noteDao: NoteDao) {
 
-    // aTODO PHASE 2.0: Define getAllNotes method - call noteDao to get all notes
-    val readAllNoteData: LiveData<List<Note>> = noteDao.readAllNoteData()
+    // TODO PHASE 2.0: Define getAllNotes method - call noteDao to get all notes
+    val readnote: LiveData<List<Note>> = noteDao.readnote()
 
-    suspend fun addNote(Note: Note){
-        noteDao.addNote(Note)
-    }
-    suspend fun updateNote(Note: Note){
-        noteDao.updateNote(Note)
-    }
-    suspend fun deleteNote(Note: Note){
-        noteDao.deleteNote(Note)
+    // TODO PHASE 2.0: Define addNote method - call noteDao to insert note
+    suspend fun addnote(inNote:Note){
+        noteDao.addnote(inNote)
     }
 
-    // aTODO PHASE 2.0: Define addNote method - call noteDao to insert note
+    // TODO PHASE 2.0: Define updateNote method - call noteDao to update note
+    suspend fun updatenote(inNote:Note){
+        noteDao.updatenote(inNote)
+    }
 
-    // aTODO PHASE 2.0: Define updateNote method - call noteDao to update note
-
-    // TaODO PHASE 2.0: Define deleteNote method - call noteDao to delete note
+    // TODO PHASE 2.0: Define deleteNote method - call noteDao to delete note
+    suspend fun deletenote(inNote:Note){
+        noteDao.deletenote(inNote)
+    }
 }

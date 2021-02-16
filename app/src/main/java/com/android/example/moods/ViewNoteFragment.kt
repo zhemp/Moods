@@ -18,10 +18,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_view_note.*
 
 class ViewNoteFragment : Fragment() {
-
+    private lateinit var myNoteViewModel: NoteViewModel
     val args: ViewNoteFragmentArgs by navArgs()
-
-    private lateinit var myNoteViewModel : NoteViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,12 +27,11 @@ class ViewNoteFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_view_note, container, false)
-        myNoteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        myNoteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
 
         // TODO PHASE 1.3: Set Data on screen by grabbing Note from safe args
         val notein = args.notein
@@ -60,6 +57,10 @@ class ViewNoteFragment : Fragment() {
             val ac = ViewNoteFragmentDirections.actionViewNoteFragmentToUpdateNoteFragment(notein)
             it.findNavController().navigate(ac)
         }
+        fab_yes2.setOnClickListener {
+            val ac = R.id.action_viewNoteFragment_to_noteFeedFragment
+            it.findNavController().navigate(ac)
+        }
 
 
         // TODO PHASE 1.3: Add an on click listener to the 'trashcan' FAB and call deleteNoteFromDB
@@ -70,7 +71,8 @@ class ViewNoteFragment : Fragment() {
 
     private fun deleteNoteFromDB(notein: Note) {
         // TODO PHASE 2.3: Delete Note Object being viewed using NoteViewModel
-        myNoteViewModel.deleteNote(notein)
+        myNoteViewModel.deletenote(notein)
+        Toast.makeText(requireContext(),"Note deleted", Toast.LENGTH_SHORT).show()
 
         // TODO PHASE 1.3: Use the Navigation Controller to switch to NoteFeedFragment
             val ac = R.id.action_viewNoteFragment_to_noteFeedFragment

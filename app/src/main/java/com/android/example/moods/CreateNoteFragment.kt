@@ -17,17 +17,14 @@ import kotlinx.android.synthetic.main.fragment_create_note.*
 
 class CreateNoteFragment : Fragment() {
 
-    //2.1
-    private lateinit var myNoteViewModel : NoteViewModel
+    private lateinit var myNoteViewModel: NoteViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_create_note, container, false)
-        myNoteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
-
-
     }
     fun resetOutline(){
         imageView1.setImageResource(R.drawable.ic_anxious_outline_false)
@@ -39,7 +36,7 @@ class CreateNoteFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        myNoteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
         var mood = ""
         // TODO PHASE 1.2: Add on click listener to the submission FAB that calls insertNoteIntoDB()
         fab_yes.setOnClickListener {
@@ -99,10 +96,14 @@ class CreateNoteFragment : Fragment() {
     // TODO TIP: It might be helpful to create a function that resets all the mood images to be w/o outlines
 
 
-    private fun insertNoteIntoDB(title:String, text:String,mood:String) {
+    private fun insertNoteIntoDB(title: String, text:String, Mood:String) {
         // TODO PHASE 2.1: Create Note Object from data inputted and add Note to Database using NoteViewModel
-        val note = Note(0,title,text,mood)
-        myNoteViewModel.addNote(note)
+        // todo check if either text is empty
+        val note = Note(0, title, text, Mood)
+
+        myNoteViewModel.addnote(note)
+        Toast.makeText(requireContext(),"New Note Saved", Toast.LENGTH_SHORT).show()
+
         // TODO PHASE 1.2: Use the Navigation Controller to switch to NoteFeedFragment
         val ac = R.id.action_createNoteFragment_to_noteFeedFragment
         findNavController().navigate(ac)
