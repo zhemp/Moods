@@ -35,20 +35,9 @@ class NoteFeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-//       val happylist : MutableList<Note> = mutableListOf<Note>(
-//            Note(1,"health","wo rinidma","mad"),
-//            Note(2, "un-affairs","wo rinidma2","happy"),
-//            Note(3, "law-and-crime-prevention","wo rinidma3","content"),
-//            Note(4, "human-rights","wo rinidma4","anxious")
-//        )
         // TODO PHASE 1.1: Add RecyclerView
         //  you may fill the recyclerview with dummy data to test it out
-        //  but you'll want to remove the dummy data when working on Phase 2
-        //val feeds = topic_recyclerview.apply {
-        //    layoutManager = LinearLayoutManager(requireContext())
-        //    adapter = NoteListAdapter()
-        //}
+        //  but you'll want to remove the dummy data when working on Phase
 
         val noteadapter = NoteListAdapter()
         val recyclerView = view.topic_recyclerview
